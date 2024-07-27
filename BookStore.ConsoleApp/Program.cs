@@ -45,16 +45,26 @@ static int GetRandomNumber()
 
 
 
+
+
+
 // tamrin 2
 // part 1
-//Console.WriteLine(DescendingReturner(GetNumber("Enter number for returnal Descending :")));
+Console.WriteLine(DescendingReturner(GetNumber("Enter number for returnal Descending :")));
 
+//tamrin 2
+// part 2
 printTogether("ali", "reza", "mmad" , "hashem");
+
+
+
+
+
 
 static string DescendingReturner(int number )
 {
     
-    if (number == 0 || number == 1)
+    if (number == 1)
 
         return "1";
 
@@ -72,10 +82,6 @@ static int GetNumber(string msg)
 
     return number;
 }
-
-
-//tamrin 2
-// part 2
 
 
 static void printTogether(params string[] name )
