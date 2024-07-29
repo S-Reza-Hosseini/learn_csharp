@@ -9,3 +9,5 @@ Console.WriteLine($"BookStore {bookStore.Name} in {bookStore.Address} is opened 
 bookStore.Advicing("ali");
 
 bookStore.nobatDehiRoydadKetab("ali");
+List<Book> BookList = bookStore.AddBook();
+bookStore.sellBook(BookList);
