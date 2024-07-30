@@ -6,12 +6,14 @@ using System.Security.Cryptography.X509Certificates;
 
 class BookStore
 {
-    public BookStore(string name, string address, bool kafe, bool makanDengBrayeKetabKhani)
+    public BookStore(string name, string address, bool kafe = false,
+     bool makanDengBrayeKetabKhani = false, bool hasStationary = false)
     {
         Name = name;
         Address = address;
         Kafe = kafe;
         MakanDengBrayeKetabKhani = makanDengBrayeKetabKhani;
+        HasStationary = hasStationary;
     }
     public string Name { get; set;}
 
@@ -21,6 +23,7 @@ class BookStore
 
     public bool MakanDengBrayeKetabKhani {get; set;}
 
+    public bool HasStationary {get; set;}
 
 
     public void Advicing(string customerName)
