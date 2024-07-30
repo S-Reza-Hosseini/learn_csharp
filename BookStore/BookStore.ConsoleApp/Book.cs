@@ -1,4 +1,4 @@
-class Book 
+public class Book 
 {
 
     public string BookName {get; set;}
@@ -7,6 +7,8 @@ class Book
 
     public double BookPrice {get; set;}
 
+    public string LendBook(string book, string customerName) =>
+        $"Welcome. dear {customerName} now the {book} book is yours until 2 week. enjoy";
 
 
 }  

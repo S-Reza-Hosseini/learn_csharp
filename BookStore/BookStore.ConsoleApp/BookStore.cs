@@ -4,14 +4,17 @@ using System.Linq.Expressions;
 using System.Security.Cryptography.X509Certificates;
 
 
-class BookStore
+public class BookStore
 {
-    public BookStore(string name, string address, bool kafe = false,
-     bool makanDengBrayeKetabKhani = false, bool hasStationary = false)
+    public BookStore(string name,
+     string address,
+     bool haskafe = false,
+     bool makanDengBrayeKetabKhani = false,
+     bool hasStationary = false)
     {
         Name = name;
         Address = address;
-        Kafe = kafe;
+        HasKafe = haskafe;
         MakanDengBrayeKetabKhani = makanDengBrayeKetabKhani;
         HasStationary = hasStationary;
     }
@@ -19,7 +22,7 @@ class BookStore
 
     public string Address {get; set;}
 
-    public bool  Kafe {get; set;}
+    public bool  HasKafe {get; set;}
 
     public bool MakanDengBrayeKetabKhani {get; set;}
 
