@@ -35,7 +35,9 @@ public class Gamenet
         do
         {
             Console.WriteLine("do you which one ?\n" +
-                              "1 for Guess Number  ");
+                              "1 for Guess Number  \n" +
+                              "2 for Guess Word \n" +
+                              "3 for Exit of gamenet");
 
             chooseGame = GetNumber();
 
