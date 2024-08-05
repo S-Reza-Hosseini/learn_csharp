@@ -9,6 +9,10 @@ namespace Games.consoleApp;
 
 public class Gamenet
 {
+    public Gamenet(params Game[] games)
+    {
+        GameList = games.ToList();
+    }
     private Game _game;
 
     private List<Game> GameList = new List<Game>();
@@ -21,51 +25,80 @@ public class Gamenet
     {
         GameList.Add(game);
     }
-    public void RentGame()
+    public void RentGame(string playerName)
     {
-        int count = 0;
-        foreach (Game item in GameList)
-        {
-            count++;
-            Console.WriteLine($"{count}-{item.Name}");
-            
-        }
-        
-        int chooseGame;
+        bool stillPlay = true;
         do
         {
-            Console.WriteLine("do you which one ?\n" +
-                              "1 for Guess Number  \n" +
-                              "2 for Guess Word \n" +
-                              "3 for Exit of gamenet");
-
-            chooseGame = GetNumber();
-
-            switch (chooseGame)
-            {
-                case 1:
-                    _game = GameList[0];
-                    PlayGame();
-                    break;
-                case 2:
-                    _game = GameList[1];
-                    PlayGame();
-                    break;
-            }
-        } while (chooseGame != 3);
+            ShowEnteringMenu(playerName);
+            ChoosingGame(GetChoice(ShowGames()), playerName);
+            
+            stillPlay = MenuTimeLife();
+       
+        } while (stillPlay);
     }
     
-    private int GetNumber()
+    private int GetChoice(string msg)
     {
         bool canParseNumber = false;
 
-        var number = 0;
+        var choice= 0;
         while (!canParseNumber)
         {
-            //Console.WriteLine("enter number of game that you want play it :");
-            canParseNumber = int.TryParse(Console.ReadLine(), out number);
+            Console.WriteLine(msg);
+            canParseNumber = int.TryParse(Console.ReadLine(), out choice);
+            if (choice > GameList.Count)
+            {
+                Console.WriteLine("Wrong Choice !!! please enter correct choice");
+                canParseNumber = false;
+            }
+        }
+        return choice;
+    }
+
+    private string ShowGames()
+    {
+        int count = 0;
+        string msg = "";
+        foreach (Game item in GameList)
+        {
+            count++;
+            msg += $"{count}-{item.Name}\n";
+            
+        } 
+        
+        return msg ;
+    }
+
+    private void ShowEnteringMenu(string name)
+    {
+        Console.WriteLine($" hey {name} Welcome to us gamenet :");
+        ShowGames();
+        Console.WriteLine("do you which one ?");
+    }
+
+    private void ChoosingGame(int chooseGame, string name)
+    {
+        _game = GameList[chooseGame - 1];
+        Console.WriteLine($"Dear {name} the description of game is :" +
+                          $"{_game.Description} \n good luck!!");
+        PlayGame();
+    }
+
+    private static bool MenuTimeLife()
+    {
+        Console.WriteLine("do you want still play ? (yes/no)!");
+        string stillPlaying = Console.ReadLine().ToLower();
+
+        if (stillPlaying == "no")
+        {
+            Console.WriteLine("Do you want really exit the gamenet ? (yes/no)");
+            string exit = Console.ReadLine().ToLower();
+
+            if (exit == "yes")
+                return false;
         }
 
-        return number;
+        return true;
     }
 }

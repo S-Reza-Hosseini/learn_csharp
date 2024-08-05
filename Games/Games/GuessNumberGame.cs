@@ -8,17 +8,19 @@ namespace Games.consoleApp;
 
 public class GuessNumberGame : Game
 {
-    public override string Name { get; set; } = "Guess Number";
-
+    public GuessNumberGame(string name, string description)
+    {
+        Name = name;
+        Description = description;
+        _number = RandomNumber();
+    }
     protected override void Play()
     {
         StartGame();
     }
+    public override string Name { get; } 
 
-    public GuessNumberGame()
-    {
-        _number = RandomNumber();
-    }
+    public override string Description { get; } 
 
     public string PlayerName { get; set; }
     
@@ -28,9 +30,6 @@ public class GuessNumberGame : Game
 
     private void StartGame()
     {
-        Console.WriteLine("enter your player name :");
-        PlayerName = Console.ReadLine();
-        
         
         bool Guess = false;
 
@@ -49,7 +48,7 @@ public class GuessNumberGame : Game
             if (number == _number)
             {
                 Console.WriteLine
-                    ($"correct {PlayerName}!! you could guess number with {countGuess} time ");
+                    ($"correct !! you could guess number with {countGuess} time ");
                 Guess = true;
             }
         }

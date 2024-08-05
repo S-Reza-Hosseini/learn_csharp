@@ -8,8 +8,9 @@ namespace Games.consoleApp;
 
 public abstract class Game
 {
-    public abstract string Name { get; set; }
-
+    public abstract string Name { get;}
+    
+    public virtual string Description => String.Empty;
     public void Start()
     {
         Console.WriteLine($"Game {Name} started");

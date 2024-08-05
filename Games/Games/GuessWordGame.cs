@@ -9,7 +9,14 @@ namespace Games.consoleApp;
 public class GuessWordGame : Game
 {
 
-    public override string Name { get; set; } = "Guess Word";
+    public GuessWordGame(string name, string description)
+    {
+        Name = name;
+        Description = description;
+    }
+
+    public override string Name { get;} = "Guess Word";
+    public override string Description { get; } 
 
     protected override void Play()
     {
@@ -24,8 +31,6 @@ public class GuessWordGame : Game
 
     public void StartGame()
     {
-        Console.WriteLine("enter your player name :");
-        PlayerName = Console.ReadLine();
         
         Console.WriteLine("enter level for Game :\n" +
                           "1 for beginner \n" +
@@ -86,7 +91,7 @@ public class GuessWordGame : Game
 
             if (_word == GuessWord)
             {
-                Console.WriteLine($"well done {PlayerName} !! your guess is correct !!");
+                Console.WriteLine($"well done !! your guess is correct !!");
                 findWord = true;
             }
             else
@@ -125,7 +130,7 @@ public class GuessWordGame : Game
 
             if (_word == GuessWord)
             {
-                Console.WriteLine($"well done {PlayerName} !! your guess is correct !!");
+                Console.WriteLine($"well done !! your guess is correct !!");
                 findWord = true;
             }
             else
@@ -143,7 +148,8 @@ public class GuessWordGame : Game
 
                     char adviceChar = _word[randomAdVice];
 
-                    Console.WriteLine($"one of the car characters of the word is {adviceChar}!! ");
+                    Console.WriteLine($"one of the car characters " +
+                                      $"of the word is {adviceChar}!! ");
                     
                     countAdvice++;
                 }
@@ -164,7 +170,8 @@ public class GuessWordGame : Game
             
             if (_word == GuessWord)
             {
-                Console.WriteLine($"well done {PlayerName} !! your guess is correct !!");
+                Console.WriteLine($"well done " +
+                                  $"!! your guess is correct !!");
                 findWord = true;
             }
             else
