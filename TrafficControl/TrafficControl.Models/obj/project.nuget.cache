@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LHLdMCsd4uTXGYl11N/eyC2d2Rmxfy8HtaQ04XJ4vJ7xIKwAb2Ne59l5pais3sY9Sd5WmZlFftnDkbHPMpaTWA==",
+  "dgSpecHash": "u6/6RYhCpri7IDWiyDQhn05drrX1xOUwafS/j5iIUIs2MGOmrySgBX0aPPVAMSfY6gSsVqTMnOyWWEO3J9rNgg==",
   "success": true,
-  "projectFilePath": "F:\\csharp\\TrafficControl\\TrafficControl.Models\\TrafficControl.Models.csproj",
+  "projectFilePath": "/home/reza/Documents/projects/git_project/github_repo/learn_csharp/TrafficControl/TrafficControl.Models/TrafficControl.Models.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
