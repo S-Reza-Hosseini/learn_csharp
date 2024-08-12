@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficControl.ConsoleApp", "TrafficControl.ConsoleApp\TrafficControl.ConsoleApp.csproj", "{EB5ACAFF-215C-49CB-8FCA-98938406A859}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficControl.Models", "TrafficControl.Models\TrafficControl.Models.csproj", "{79862372-7AEA-4C5F-80E4-EC564008A449}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB5ACAFF-215C-49CB-8FCA-98938406A859}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB5ACAFF-215C-49CB-8FCA-98938406A859}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB5ACAFF-215C-49CB-8FCA-98938406A859}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB5ACAFF-215C-49CB-8FCA-98938406A859}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79862372-7AEA-4C5F-80E4-EC564008A449}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79862372-7AEA-4C5F-80E4-EC564008A449}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79862372-7AEA-4C5F-80E4-EC564008A449}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79862372-7AEA-4C5F-80E4-EC564008A449}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

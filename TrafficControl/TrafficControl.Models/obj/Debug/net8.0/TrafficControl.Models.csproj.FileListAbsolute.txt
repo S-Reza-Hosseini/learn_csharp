@@ -1,0 +1,11 @@
+F:\csharp\TrafficControl\TrafficControl.Models\obj\Debug\net8.0\TrafficControl.Models.GeneratedMSBuildEditorConfig.editorconfig
+F:\csharp\TrafficControl\TrafficControl.Models\obj\Debug\net8.0\TrafficControl.Models.AssemblyInfoInputs.cache
+F:\csharp\TrafficControl\TrafficControl.Models\obj\Debug\net8.0\TrafficControl.Models.AssemblyInfo.cs
+F:\csharp\TrafficControl\TrafficControl.Models\obj\Debug\net8.0\TrafficControl.Models.csproj.CoreCompileInputs.cache
+F:\csharp\TrafficControl\TrafficControl.Models\bin\Debug\net8.0\TrafficControl.Models.deps.json
+F:\csharp\TrafficControl\TrafficControl.Models\bin\Debug\net8.0\TrafficControl.Models.dll
+F:\csharp\TrafficControl\TrafficControl.Models\bin\Debug\net8.0\TrafficControl.Models.pdb
+F:\csharp\TrafficControl\TrafficControl.Models\obj\Debug\net8.0\TrafficControl.Models.dll
+F:\csharp\TrafficControl\TrafficControl.Models\obj\Debug\net8.0\refint\TrafficControl.Models.dll
+F:\csharp\TrafficControl\TrafficControl.Models\obj\Debug\net8.0\TrafficControl.Models.pdb
+F:\csharp\TrafficControl\TrafficControl.Models\obj\Debug\net8.0\ref\TrafficControl.Models.dll
