@@ -30,7 +30,8 @@ public class App
                     ReportTraffic.Run(police); break;
                 case 4 : ShowRoads.Run(police); break;
                 case 5 : CheckViolateWithLicensePlate.Run(police); break;
-                case 6 : workAgain = false; break;
+                case 6 : ShowDetailRoadsLimitSpeed.Run(police); break;
+                case 7 : workAgain = false; break;
                 default : WriteLine("invalid choice. try again"); break;
             }
             
@@ -51,7 +52,8 @@ public class App
     
     [4]. Show Roads
     [5]. check Violate with licensePlateNum
-    [6]. Exit
+    [6]. Showing start and End in roads with limit under 60 km/h
+    [7]. Exit
 
     My Choice is : ");
     }
