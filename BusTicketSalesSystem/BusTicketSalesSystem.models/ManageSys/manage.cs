@@ -14,21 +14,22 @@ public class Manage
     private readonly List<Travel> _travels = new();
     private readonly List<Bus> _buses = new();
     private readonly List<Ticket> _tickets = new();
-    private readonly List<Customer> _customers = new();
+    private Customer _traveler;
     
     public void RegesterTravel(
         string beginning,
         string destination,
         DateTime dateTravel,
+        decimal fee,
         int busId)
     {
         var bus = _buses[busId - 1];
-        _travels.Add(new Travel(beginning, destination, dateTravel, bus));
+        _travels.Add(new Travel(beginning, destination, dateTravel,fee, bus));
     }
 
     public void RegesterCostumer(string name, string family,string phoneNumber ,int nationalId)
     {
-        _customers.Add(new Customer(name, family, nationalId, phoneNumber));
+        _traveler = new Customer(name, family, nationalId, phoneNumber);
     }
 
     public void RegesterBus(string licensePlate, TypeBus type)
@@ -65,14 +66,11 @@ public class Manage
     public void Sale(int travelId)
     {
         var travel = _travels[travelId - 1];
-        var customer = _customers[0];
-        if (travel.Capacity > 0)
+        if (travel.Capacity > 0 && DateTime.Now < travel.DateTravel)
         {
             _tickets.Add(new Ticket(
-                customer.Name,
-                customer.Family,
-                customer.NationalId,
-                customer.PhoneNumber,
+
+                _traveler,
                 travel.Beginning,
                 travel.Destination,
                 travel.DateTravel,
@@ -80,6 +78,8 @@ public class Manage
                 travel.Fee));
 
             travel.Capacity -= 1;
+
+            travel.Bus.Income += travel.Fee;
         }
         else
         {
@@ -90,15 +90,12 @@ public class Manage
 
     public void ReservationTicket(int travelId)
     {
-        var customer = _customers[0];
         var travel = _travels[travelId - 1];
-        if (travel.Capacity > 0)
+        if (travel.Capacity > 0 
+            && DateTime.Now < travel.DateTravel)
         {
             _tickets.Add(new Ticket(
-                customer.Name,
-                customer.Family,
-                customer.NationalId,
-                customer.PhoneNumber,
+                _traveler,
                 travel.Beginning,
                 travel.Destination,
                 travel.DateTravel,
@@ -106,6 +103,7 @@ public class Manage
                 travel.Fee));
 
             travel.Capacity -= 1;
+            travel.Bus.Income += travel.Fee * 0.3M;
         }
         else
         {
@@ -114,55 +112,46 @@ public class Manage
         }
     }
 
-    public double CanselTraveling(int nationalId, int travelId)
+    public decimal CanselTraveling(int nationalId, int travelId)
     {
-        var ticket = _tickets.Find(_ => _.NationalId == nationalId);
+        var ticket = _tickets.Find(_ => _.Customer.NationalId == nationalId);
         var travel = _travels[travelId - 1];
-        
-        var refundAount = 0.0;
 
+        decimal refundAmount = 0;
+        
         if (ticket.PayMethod == TypePay.Sell)
         {
-            refundAount = ticket.TotalPay * 0.80;
+            refundAmount = ticket.TotalPay * 0.8M;
+            travel.Bus.Income -= refundAmount;
         }
 
         travel.Capacity += 1;
 
-        return refundAount;
+        return refundAmount;
     }
 
-    public void ShowSellBus()
+    public List<ShowBusDto> ShowIncomingBus()
     {
-        
+        return _buses.OrderByDescending(bus => bus.Income).Select((bus, index) => new ShowBusDto()
+        {
+            Id = index+1,
+            LicensePlate = bus.LicensePlate,
+            Type = bus.Type
+        }).ToList();
     }
 
-    public string ShowMustIncomingPassenger()
+    public string ShowMostIncomingPassenger()
     
         => _travels.Select(_ => _.Destination)
-            .ToList()
-            .OrderByDescending(word => word.Count())
+            .OrderByDescending(destination => destination.Count())
             .FirstOrDefault();
 
     public string HighestNumberOfPassengers()
 
         => _travels.Select(_ => _.Beginning)
-            .ToList()
-            .OrderByDescending(word => word.Count())
+            .OrderByDescending(beginning => beginning.Count())
             .FirstOrDefault();
 
-    public List<ShowTicketsDto> ShowTickets()
-    {
-        return _tickets.Select((ticket, index) => new ShowTicketsDto()
-        {
-            Id  = index+1,
-            Name = ticket.Name,
-            Family = ticket.Family,
-            PhoneNumber = ticket.PhoneNumber,
-            Beginning = ticket.Beginning,
-            Destination = ticket.Destination,
-            DateTime = ticket.DateTime,
-            TotalPay = ticket.TotalPay
-        }).ToList();
-    }
+    
 
 }

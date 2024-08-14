@@ -1,39 +1,30 @@
 namespace BusTicketSalesSystem.models.Tickets;
+using BusTicketSalesSystem.models.Customers;
 
-public class Ticket
+class Ticket
 {
     public Ticket(
-        string name,
-        string family,
-        int nationalId,
-        string phoneNumber,
+        Customer customer,
         string beginning,
         string destination,
         DateTime dateTime,
         TypePay payMethod,
-        double totalpay)
+        decimal totalpay)
     {
-        Name = name;
-        Family = family;
-        NationalId = nationalId;
-        PhoneNumber = phoneNumber;
+        Customer = customer;
         Beginning = beginning;
         Destination = destination;
         DateTime = dateTime;
         PayMethod = payMethod;
         TotalPay = totalpay;
     }
-    public string Name { get;}
-    public string Family { get;}
-    
-    public int NationalId { get; }
-    public string PhoneNumber { get;}
+    public Customer Customer { get; }
     public string Beginning { get;}
     public string Destination { get;}
     public DateTime DateTime { get; }
     public TypePay PayMethod { get; set; }
     
-    public double TotalPay { get; }
+    public decimal TotalPay { get; }
     
     
     

@@ -6,7 +6,8 @@ class Bus
     {
      LicensePlate= licensePlate;
      Type = type;
-
+     
+     
      if (type == TypeBus.VIP)
          Capacity = 23;
      else
@@ -17,6 +18,9 @@ class Bus
     public TypeBus Type { get; }
     public string LicensePlate { get; }
     public int Capacity { get; private set; }
+
+    public decimal Income { get; set; } = 0;
+    
 }
 
 public enum TypeBus

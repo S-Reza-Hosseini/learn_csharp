@@ -6,7 +6,7 @@ public class ShowTravelDto
     public string Beginning { get; set; } 
     public string Destination { get; set; } 
     public DateTime DateTravel { get; set; }
-    public double Fee { get; set; }
+    public decimal Fee { get; set; }
     
     public int Capacity { get; set; }
      
