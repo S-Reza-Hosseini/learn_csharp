@@ -1,4 +1,5 @@
 using BusTicketSalesSystem.models.Buses;
+using BusTicketSalesSystem.models.Tickets;
 
 
 namespace BusTicketSalesSystem.models.Travels;
@@ -24,9 +25,22 @@ class Travel
     public string Beginning { get; } 
     public string Destination { get; } 
     public DateTime DateTravel { get; }
-    public decimal Fee { get; private set; }
+    public decimal Fee { get; set; }
     public Bus Bus { get; }
 
-    public int Capacity { get; set; }
-    
+    public int Capacity { get; private set; }
+
+    private readonly List<Ticket> _tickets = new();
+
+    public void AddTicket(Ticket ticket)
+    {
+        _tickets.Add(ticket);
+        Capacity -= 1;
+    }
+    public void RemoveTicket(Ticket ticket)
+    {
+        _tickets.Remove(ticket);
+        Capacity += 1;
+    }
+
 }

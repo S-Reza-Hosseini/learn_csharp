@@ -7,4 +7,6 @@ public class ShowBusDto
     public int Id { get; set; }
     public string LicensePlate { get; set; }
     public TypeBus Type { get; set; }
+    
+    public decimal Income { get; set; }
 }

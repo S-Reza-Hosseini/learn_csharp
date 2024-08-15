@@ -14,7 +14,7 @@ public class Manage
     private readonly List<Travel> _travels = new();
     private readonly List<Bus> _buses = new();
     private readonly List<Ticket> _tickets = new();
-    private Customer _traveler;
+    private readonly List<Customer> _traveler = new();
     
     public void RegesterTravel(
         string beginning,
@@ -29,7 +29,7 @@ public class Manage
 
     public void RegesterCostumer(string name, string family,string phoneNumber ,int nationalId)
     {
-        _traveler = new Customer(name, family, nationalId, phoneNumber);
+        _traveler.Add(new Customer(name, family, nationalId, phoneNumber));
     }
 
     public void RegesterBus(string licensePlate, TypeBus type)
@@ -63,59 +63,48 @@ public class Manage
         }).ToList();
     }
 
-    public void Sale(int travelId)
+    public void Sale(int travelId, int travelerId)
     {
         var travel = _travels[travelId - 1];
-        if (travel.Capacity > 0 && DateTime.Now < travel.DateTravel)
+        var traveler = _traveler[travelerId - 1];
+
+        if (SellCondition(travel))
         {
-            _tickets.Add(new Ticket(
-
-                _traveler,
-                travel.Beginning,
-                travel.Destination,
-                travel.DateTravel,
-                TypePay.Sell,
-                travel.Fee));
-
-            travel.Capacity -= 1;
-
+            Ticket ticket = new Ticket(traveler, travel, TypePay.Sell, travel.Fee);
+             
+            travel.AddTicket(ticket);
+            
             travel.Bus.Income += travel.Fee;
-        }
-        else
-        {
-            WriteLine("cant do this !!Capacity of travel is full !!");
+            
             return;
         }
+        return;
     }
 
-    public void ReservationTicket(int travelId)
+    public void ReservationTicket(int travelId, int travelerId)
     {
         var travel = _travels[travelId - 1];
-        if (travel.Capacity > 0 
-            && DateTime.Now < travel.DateTravel)
-        {
-            _tickets.Add(new Ticket(
-                _traveler,
-                travel.Beginning,
-                travel.Destination,
-                travel.DateTravel,
-                TypePay.Reserve,
-                travel.Fee));
+        var traveler = _traveler[travelerId - 1];
 
-            travel.Capacity -= 1;
-            travel.Bus.Income += travel.Fee * 0.3M;
-        }
-        else
+        if (SellCondition(travel))
         {
-            WriteLine("cant do this !!Capacity of travel is full !!");
+            Ticket ticket = new Ticket(traveler, travel, TypePay.Reserve, travel.Fee);
+             
+            travel.AddTicket(ticket);
+            
+            travel.Bus.Income += travel.Fee * 0.3M;
+            
             return;
         }
+        
+        return;
+
     }
 
     public decimal CanselTraveling(int nationalId, int travelId)
     {
-        var ticket = _tickets.Find(_ => _.Customer.NationalId == nationalId);
         var travel = _travels[travelId - 1];
+        var ticket = _tickets.Find(_ => _.Customer.NationalId == nationalId);
 
         decimal refundAmount = 0;
         
@@ -125,7 +114,8 @@ public class Manage
             travel.Bus.Income -= refundAmount;
         }
 
-        travel.Capacity += 1;
+       
+        travel.RemoveTicket(ticket);
 
         return refundAmount;
     }
@@ -136,22 +126,37 @@ public class Manage
         {
             Id = index+1,
             LicensePlate = bus.LicensePlate,
-            Type = bus.Type
+            Type = bus.Type,
+            Income = bus.Income
         }).ToList();
     }
 
     public string ShowMostIncomingPassenger()
-    
-        => _travels.Select(_ => _.Destination)
-            .OrderByDescending(destination => destination.Count())
-            .FirstOrDefault();
 
+        => _travels.GroupBy(_ => _.Destination).Select(_ => new
+        {
+            City = _.Key,
+            PassengersCount = _.Sum(C => C.Bus.Capacity-C.Capacity)
+        }).OrderByDescending(_ => _.PassengersCount).Select(_ => _.City).FirstOrDefault();
     public string HighestNumberOfPassengers()
 
-        => _travels.Select(_ => _.Beginning)
-            .OrderByDescending(beginning => beginning.Count())
-            .FirstOrDefault();
+        => _travels.GroupBy(_ => _.Beginning).Select(_ => new
+        {
+            City = _.Key,
+            PassengersCount = _.Sum(C => C.Bus.Capacity-C.Capacity)
+        }).OrderByDescending(_ => _.PassengersCount).Select(_ => _.City).FirstOrDefault();
 
+
+   
+    private bool SellCondition(Travel travel)
+    {
+       
+        if (travel.Capacity <= 0 && DateTime.Now > travel.DateTravel)
+            return false;
+        return true;
+    }
     
-
+    
+    
+    
 }
